@@ -1,0 +1,195 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Main.gd" type="Script" id=1]
+[ext_resource path="res://Anonymous Pro.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://TerminalManager.gd" type="Script" id=3]
+[ext_resource path="res://M2.png" type="Texture" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 2 )
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="HBoxContainer"]
+margin_right = 112.0
+margin_bottom = 600.0
+
+[node name="Open" type="Button" parent="HBoxContainer/GridContainer"]
+margin_right = 112.0
+margin_bottom = 20.0
+text = "Open "
+
+[node name="FileDialog" type="FileDialog" parent="HBoxContainer/GridContainer/Open"]
+margin_right = 628.0
+margin_bottom = 324.0
+window_title = "Abrir un Archivo"
+resizable = true
+mode = 0
+access = 2
+current_dir = "C:/Users/byksp/Documents/Terminal Viewer"
+current_path = "C:/Users/byksp/Documents/Terminal Viewer/"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/GridContainer"]
+margin_top = 24.0
+margin_right = 112.0
+margin_bottom = 24.0
+
+[node name="Button" type="Button" parent="HBoxContainer/GridContainer"]
+margin_top = 28.0
+margin_right = 112.0
+margin_bottom = 48.0
+text = "Display content"
+
+[node name="SplitContainer" type="VSplitContainer" parent="HBoxContainer"]
+margin_left = 116.0
+margin_right = 827.0
+margin_bottom = 600.0
+
+[node name="Previewer" type="VBoxContainer" parent="HBoxContainer/SplitContainer"]
+margin_right = 711.0
+margin_bottom = 332.0
+script = ExtResource( 3 )
+
+[node name="Navigation2" type="HBoxContainer" parent="HBoxContainer/SplitContainer/Previewer"]
+margin_right = 711.0
+margin_bottom = 20.0
+alignment = 1
+
+[node name="Prev" type="Button" parent="HBoxContainer/SplitContainer/Previewer/Navigation2"]
+margin_left = 292.0
+margin_right = 320.0
+margin_bottom = 20.0
+text = "<="
+
+[node name="Terminals" type="Label" parent="HBoxContainer/SplitContainer/Previewer/Navigation2"]
+margin_left = 324.0
+margin_top = 3.0
+margin_right = 387.0
+margin_bottom = 17.0
+text = "Terminals"
+
+[node name="Next" type="Button" parent="HBoxContainer/SplitContainer/Previewer/Navigation2"]
+margin_left = 391.0
+margin_right = 419.0
+margin_bottom = 20.0
+text = "=>"
+
+[node name="PICT" type="GridContainer" parent="HBoxContainer/SplitContainer/Previewer"]
+margin_top = 24.0
+margin_right = 711.0
+margin_bottom = 290.0
+columns = 2
+
+[node name="Texture" type="TextureRect" parent="HBoxContainer/SplitContainer/Previewer/PICT"]
+margin_right = 307.0
+margin_bottom = 266.0
+rect_min_size = Vector2( 307, 266 )
+texture = ExtResource( 4 )
+
+[node name="Terminal" type="RichTextLabel" parent="HBoxContainer/SplitContainer/Previewer/PICT"]
+margin_left = 311.0
+margin_right = 711.0
+margin_bottom = 266.0
+rect_min_size = Vector2( 400, 207 )
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_enabled = true
+visible_characters = 990
+
+[node name="Information" type="HBoxContainer" parent="HBoxContainer/SplitContainer/Previewer"]
+margin_top = 294.0
+margin_right = 711.0
+margin_bottom = 308.0
+alignment = 1
+
+[node name="Terminals" type="Label" parent="HBoxContainer/SplitContainer/Previewer/Information"]
+margin_left = 287.0
+margin_right = 366.0
+margin_bottom = 14.0
+text = "Terminals: 0"
+
+[node name="Pages" type="Label" parent="HBoxContainer/SplitContainer/Previewer/Information"]
+margin_left = 370.0
+margin_right = 423.0
+margin_bottom = 14.0
+text = "Pages: 0"
+
+[node name="Navigation" type="HBoxContainer" parent="HBoxContainer/SplitContainer/Previewer"]
+margin_top = 312.0
+margin_right = 711.0
+margin_bottom = 332.0
+alignment = 1
+
+[node name="Prev" type="Button" parent="HBoxContainer/SplitContainer/Previewer/Navigation"]
+margin_left = 305.0
+margin_right = 333.0
+margin_bottom = 20.0
+text = "<="
+
+[node name="Pages" type="Label" parent="HBoxContainer/SplitContainer/Previewer/Navigation"]
+margin_left = 337.0
+margin_top = 3.0
+margin_right = 374.0
+margin_bottom = 17.0
+text = "Pages"
+
+[node name="Next" type="Button" parent="HBoxContainer/SplitContainer/Previewer/Navigation"]
+margin_left = 378.0
+margin_right = 406.0
+margin_bottom = 20.0
+text = "=>"
+
+[node name="Editor" type="VBoxContainer" parent="HBoxContainer/SplitContainer"]
+margin_top = 344.0
+margin_right = 711.0
+margin_bottom = 600.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/SplitContainer/Editor"]
+margin_right = 711.0
+margin_bottom = 20.0
+
+[node name="Update" type="Button" parent="HBoxContainer/SplitContainer/Editor/HBoxContainer"]
+margin_right = 112.0
+margin_bottom = 20.0
+text = "Update preview"
+
+[node name="Inline" type="TextEdit" parent="HBoxContainer/SplitContainer/Editor"]
+margin_top = 24.0
+margin_right = 711.0
+margin_bottom = 256.0
+size_flags_vertical = 3
+show_line_numbers = true
+draw_tabs = true
+draw_spaces = true
+wrap_enabled = true
+[connection signal="pressed" from="HBoxContainer/GridContainer/Open" to="." method="_on_Open_pressed"]
+[connection signal="file_selected" from="HBoxContainer/GridContainer/Open/FileDialog" to="." method="_on_FileDialog_file_selected"]
+[connection signal="pressed" from="HBoxContainer/GridContainer/Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="HBoxContainer/SplitContainer/Previewer/Navigation2/Prev" to="HBoxContainer/SplitContainer/Previewer" method="_on_Prev_term_pressed"]
+[connection signal="pressed" from="HBoxContainer/SplitContainer/Previewer/Navigation2/Next" to="HBoxContainer/SplitContainer/Previewer" method="_on_Next_term_pressed"]
+[connection signal="pressed" from="HBoxContainer/SplitContainer/Previewer/Navigation/Prev" to="HBoxContainer/SplitContainer/Previewer" method="_on_Prev_pressed"]
+[connection signal="pressed" from="HBoxContainer/SplitContainer/Previewer/Navigation/Next" to="HBoxContainer/SplitContainer/Previewer" method="_on_Next_pressed"]
+[connection signal="pressed" from="HBoxContainer/SplitContainer/Editor/HBoxContainer/Update" to="." method="_on_Update_pressed"]
