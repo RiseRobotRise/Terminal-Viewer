@@ -16,6 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Terminal Viewer"
+run/main_scene="res://Main.tscn"
 config/custom_user_dir_name="C://Algo"
 config/icon="res://icon.png"
 

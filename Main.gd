@@ -66,13 +66,20 @@ func _on_FileDialog_file_selected(path):
 	var text : String
 	current.open(path, File.READ)
 	text = current.get_as_text()
-	$HBoxContainer/SplitContainer/Editor/Inline.text = text
-	$HBoxContainer/SplitContainer/Previewer.split_terminals(alephone_to_bbcode(text))
+	$VBoxContainer/HBoxContainer/SplitContainer/Editor/Inline.text = text
+	$VBoxContainer/HBoxContainer/SplitContainer/Previewer.split_terminals(alephone_to_bbcode(text))
 
 func _on_Button_pressed():
 	$HBoxContainer/SplitContainer/Editor/Inline.text = terminal
 
 
 func _on_Update_pressed():
-	var text = $HBoxContainer/SplitContainer/Editor/Inline.text
-	$HBoxContainer/SplitContainer/Previewer.split_terminals(alephone_to_bbcode(text))
+	var text = $VBoxContainer/HBoxContainer/SplitContainer/Editor/Inline.text
+	$VBoxContainer/HBoxContainer/SplitContainer/Previewer.split_terminals(alephone_to_bbcode(text))
+
+
+func _on_Toolbar_file_option_selected(id : int):
+	if id == 0:
+		$VBoxContainer/PanelContainer/OpenDialog.popup_centered()
+	elif id == 1:
+		$VBoxContainer/PanelContainer/SaveDialog.popup_centered()
