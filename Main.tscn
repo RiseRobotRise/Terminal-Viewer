@@ -36,13 +36,13 @@ __meta__ = {
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
 margin_right = 1024.0
-margin_bottom = 34.0
+margin_bottom = 144.0
 
 [node name="Toolbar" type="HBoxContainer" parent="VBoxContainer/PanelContainer"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 1017.0
-margin_bottom = 27.0
+margin_bottom = 137.0
 script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -50,7 +50,7 @@ __meta__ = {
 
 [node name="File" type="MenuButton" parent="VBoxContainer/PanelContainer/Toolbar"]
 margin_right = 35.0
-margin_bottom = 20.0
+margin_bottom = 130.0
 text = "File"
 items = [ "Open", null, 0, false, false, 0, 0, null, "", false, "Save as Terminal", null, 0, false, false, 1, 0, null, "", false, "Export BBCode", null, 0, false, false, 2, 0, null, "", false ]
 switch_on_hover = true
@@ -58,16 +58,19 @@ switch_on_hover = true
 [node name="About" type="MenuButton" parent="VBoxContainer/PanelContainer/Toolbar"]
 margin_left = 39.0
 margin_right = 89.0
-margin_bottom = 20.0
+margin_bottom = 130.0
 text = "About"
 items = [ "About", null, 0, false, false, 0, 0, null, "", false ]
 switch_on_hover = true
 
 [node name="SaveDialog" type="FileDialog" parent="VBoxContainer/PanelContainer"]
-margin_top = 38.0
-margin_right = 307.0
-margin_bottom = 168.0
+visible = true
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1017.0
+margin_bottom = 137.0
 window_title = "Guardar un Archivo"
+resizable = true
 access = 2
 current_dir = "E:/Github/Terminal-Viewer"
 current_path = "E:/Github/Terminal-Viewer/"
@@ -84,7 +87,7 @@ current_dir = "E:/Github/Terminal-Viewer"
 current_path = "E:/Github/Terminal-Viewer/"
 
 [node name="HBoxContainer" type="HSplitContainer" parent="VBoxContainer"]
-margin_top = 38.0
+margin_top = 148.0
 margin_right = 1024.0
 margin_bottom = 617.0
 size_flags_horizontal = 3
@@ -92,7 +95,7 @@ size_flags_vertical = 3
 
 [node name="SplitContainer" type="VSplitContainer" parent="VBoxContainer/HBoxContainer"]
 margin_right = 1024.0
-margin_bottom = 579.0
+margin_bottom = 469.0
 
 [node name="Previewer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/SplitContainer"]
 margin_right = 1024.0
@@ -191,7 +194,7 @@ text = "=>"
 [node name="Editor" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/SplitContainer"]
 margin_top = 344.0
 margin_right = 1024.0
-margin_bottom = 579.0
+margin_bottom = 469.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -208,13 +211,14 @@ text = "Update preview"
 [node name="Inline" type="TextEdit" parent="VBoxContainer/HBoxContainer/SplitContainer/Editor"]
 margin_top = 24.0
 margin_right = 1024.0
-margin_bottom = 235.0
+margin_bottom = 125.0
 size_flags_vertical = 3
 show_line_numbers = true
 draw_tabs = true
 draw_spaces = true
 wrap_enabled = true
 [connection signal="file_option_selected" from="VBoxContainer/PanelContainer/Toolbar" to="." method="_on_Toolbar_file_option_selected"]
+[connection signal="file_selected" from="VBoxContainer/PanelContainer/SaveDialog" to="." method="_on_SaveDialog_file_selected"]
 [connection signal="file_selected" from="VBoxContainer/PanelContainer/OpenDialog" to="." method="_on_FileDialog_file_selected"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/SplitContainer/Previewer/Navigation2/Prev" to="VBoxContainer/HBoxContainer/SplitContainer/Previewer" method="_on_Prev_term_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/SplitContainer/Previewer/Navigation2/Next" to="VBoxContainer/HBoxContainer/SplitContainer/Previewer" method="_on_Next_term_pressed"]

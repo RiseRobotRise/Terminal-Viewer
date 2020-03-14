@@ -1,6 +1,7 @@
 extends Control
 
 var terminal : String
+var rawterm : String
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -67,15 +68,18 @@ func _on_FileDialog_file_selected(path):
 	current.open(path, File.READ)
 	text = current.get_as_text()
 	$VBoxContainer/HBoxContainer/SplitContainer/Editor/Inline.text = text
-	$VBoxContainer/HBoxContainer/SplitContainer/Previewer.split_terminals(alephone_to_bbcode(text))
+	update_terms()
 
 func _on_Button_pressed():
 	$HBoxContainer/SplitContainer/Editor/Inline.text = terminal
 
 
 func _on_Update_pressed():
-	var text = $VBoxContainer/HBoxContainer/SplitContainer/Editor/Inline.text
-	$VBoxContainer/HBoxContainer/SplitContainer/Previewer.split_terminals(alephone_to_bbcode(text))
+	update_terms()
+
+func update_terms():
+	rawterm = $VBoxContainer/HBoxContainer/SplitContainer/Editor/Inline.text
+	$VBoxContainer/HBoxContainer/SplitContainer/Previewer.split_terminals(alephone_to_bbcode(rawterm))
 
 
 func _on_Toolbar_file_option_selected(id : int):
@@ -83,3 +87,11 @@ func _on_Toolbar_file_option_selected(id : int):
 		$VBoxContainer/PanelContainer/OpenDialog.popup_centered()
 	elif id == 1:
 		$VBoxContainer/PanelContainer/SaveDialog.popup_centered()
+
+
+func _on_SaveDialog_file_selected(path):
+	var file :File = File.new()
+	file.open(path, File.WRITE)
+	file.seek_end()
+	file.store_line(rawterm)
+	file.close()
