@@ -1,7 +1,12 @@
 extends Control
-
+enum {
+	RAW,
+	BBCODE,
+	HTML
+}
 var terminal : String
 var rawterm : String
+var export_flag : int = RAW
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -85,13 +90,20 @@ func update_terms():
 func _on_Toolbar_file_option_selected(id : int):
 	if id == 0:
 		$VBoxContainer/PanelContainer/OpenDialog.popup_centered()
-	elif id == 1:
+	else:
+		if id == 1:
+			export_flag = RAW
+		elif id == 2: 
+			export_flag = BBCODE
 		$VBoxContainer/PanelContainer/SaveDialog.popup_centered()
-
+	
 
 func _on_SaveDialog_file_selected(path):
 	var file :File = File.new()
 	file.open(path, File.WRITE)
 	file.seek_end()
-	file.store_line(rawterm)
+	if export_flag == RAW:
+		file.store_line(rawterm)
+	elif export_flag == BBCODE:
+		file.store_line(terminal)
 	file.close()
