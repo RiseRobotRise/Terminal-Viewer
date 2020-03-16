@@ -5,7 +5,7 @@ var index : int = 0
 var term : int = 0
 onready var CONTAINER = $CenterContainer/PICT
 onready var PICTURE = $CenterContainer/PICT/Texture
-onready var TERMINAL = $CenterContainer/PICT/Terminal
+onready var TERMINAL = $CenterContainer/PICT/VBoxContainer/Terminal
 #id : int
 #type : PICT/LOGON
 #args : IMG/ALGIN
