@@ -107,3 +107,5 @@ func _on_SaveDialog_file_selected(path):
 	elif export_flag == BBCODE:
 		file.store_line(terminal)
 	file.close()
+
+

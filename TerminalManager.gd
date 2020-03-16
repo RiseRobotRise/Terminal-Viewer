@@ -3,6 +3,9 @@ extends VBoxContainer
 var terminals : Array = []
 var index : int = 0
 var term : int = 0
+onready var CONTAINER = $CenterContainer/PICT
+onready var PICTURE = $CenterContainer/PICT/Texture
+onready var TERMINAL = $CenterContainer/PICT/Terminal
 #id : int
 #type : PICT/LOGON
 #args : IMG/ALGIN
@@ -77,20 +80,20 @@ func display_page(terminal : int, id : int):
 	$Information/Pages.text = "Pages :"+str(terminals[terminal].pages.size())
 	var page = terminals[terminal].pages[id]
 	if page.type == "PICT" or "CHECKPOINT":
-		$PICT/Texture.visible = true
-		$PICT.columns = 2
-		$PICT/Terminal.visible_characters = 990
+		PICTURE.visible = true
+		CONTAINER.columns = 2
+		TERMINAL.visible_characters = 990
 		if "RIGHT" in page.args:
-			$PICT/Texture.set_as_toplevel(true)
+			PICTURE.set_as_toplevel(true)
 	elif page.type == "LOGON":
-		$PICT/Texture.visible = true
-		$PICT.columns = 1
-		$PICT/Terminal.visible_characters = 72
+		PICTURE.visible = true
+		PICTURE.columns = 1
+		TERMINAL.visible_characters = 72
 	elif page.type == "INFORMATION" or "BRIEFING":
-		$PICT/Texture.visible = false
-		$PICT.columns = 1
-		$PICT/Terminal.visible_characters = 1584
-	$PICT/Terminal.bbcode_text = page.text
+		PICTURE.visible = false
+		CONTAINER.columns = 1
+		TERMINAL.visible_characters = 1584
+	TERMINAL.bbcode_text = page.text
 
 
 func _on_Prev_pressed():
@@ -118,3 +121,11 @@ func _on_Next_term_pressed():
 		term+=1
 		index=0
 		display_page(term,index)
+
+
+func _on_Prev_scale_pressed():
+	$CenterContainer.rect_scale /=  1.2
+
+
+func _on_Next_scale_pressed():
+	$CenterContainer.rect_scale *=  1.2

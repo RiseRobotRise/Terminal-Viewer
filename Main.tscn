@@ -1,13 +1,11 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
-[ext_resource path="res://Anonymous Pro.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://terminals.tres" type="DynamicFont" id=2]
 [ext_resource path="res://TerminalManager.gd" type="Script" id=3]
 [ext_resource path="res://M2.png" type="Texture" id=4]
 [ext_resource path="res://Toolbar.gd" type="Script" id=5]
-
-[sub_resource type="DynamicFont" id=1]
-font_data = ExtResource( 2 )
+[ext_resource path="res://Background.tscn" type="PackedScene" id=6]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -101,13 +99,38 @@ margin_bottom = 562.0
 
 [node name="Previewer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/SplitContainer"]
 margin_right = 1024.0
-margin_bottom = 332.0
+margin_bottom = 396.0
 alignment = 1
 script = ExtResource( 3 )
 
-[node name="Navigation2" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/SplitContainer/Previewer"]
+[node name="Scale" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/SplitContainer/Previewer"]
 margin_right = 1024.0
 margin_bottom = 20.0
+alignment = 1
+
+[node name="Prev" type="Button" parent="VBoxContainer/HBoxContainer/SplitContainer/Previewer/Scale"]
+margin_left = 463.0
+margin_right = 491.0
+margin_bottom = 20.0
+text = "<="
+
+[node name="Terminals" type="Label" parent="VBoxContainer/HBoxContainer/SplitContainer/Previewer/Scale"]
+margin_left = 495.0
+margin_top = 3.0
+margin_right = 528.0
+margin_bottom = 17.0
+text = "Scale"
+
+[node name="Next" type="Button" parent="VBoxContainer/HBoxContainer/SplitContainer/Previewer/Scale"]
+margin_left = 532.0
+margin_right = 560.0
+margin_bottom = 20.0
+text = "=>"
+
+[node name="Navigation2" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/SplitContainer/Previewer"]
+margin_top = 24.0
+margin_right = 1024.0
+margin_bottom = 44.0
 alignment = 1
 
 [node name="Prev" type="Button" parent="VBoxContainer/HBoxContainer/SplitContainer/Previewer/Navigation2"]
@@ -129,31 +152,54 @@ margin_right = 575.0
 margin_bottom = 20.0
 text = "=>"
 
-[node name="PICT" type="GridContainer" parent="VBoxContainer/HBoxContainer/SplitContainer/Previewer"]
-margin_top = 24.0
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/HBoxContainer/SplitContainer/Previewer"]
+margin_top = 48.0
 margin_right = 1024.0
-margin_bottom = 290.0
+margin_bottom = 354.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Scene Root" parent="VBoxContainer/HBoxContainer/SplitContainer/Previewer/CenterContainer" instance=ExtResource( 6 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 156.0
+margin_right = 867.0
+margin_bottom = 306.0
+rect_min_size = Vector2( 711, 306 )
+
+[node name="PICT" type="GridContainer" parent="VBoxContainer/HBoxContainer/SplitContainer/Previewer/CenterContainer"]
+margin_left = 156.0
+margin_right = 867.0
+margin_bottom = 306.0
+rect_min_size = Vector2( 0, 306 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
 columns = 2
 
-[node name="Texture" type="TextureRect" parent="VBoxContainer/HBoxContainer/SplitContainer/Previewer/PICT"]
+[node name="Texture" type="TextureRect" parent="VBoxContainer/HBoxContainer/SplitContainer/Previewer/CenterContainer/PICT"]
+margin_top = 20.0
 margin_right = 307.0
-margin_bottom = 266.0
+margin_bottom = 286.0
+grow_horizontal = 2
+grow_vertical = 2
 rect_min_size = Vector2( 307, 266 )
+size_flags_horizontal = 4
+size_flags_vertical = 6
 texture = ExtResource( 4 )
 
-[node name="Terminal" type="RichTextLabel" parent="VBoxContainer/HBoxContainer/SplitContainer/Previewer/PICT"]
+[node name="Terminal" type="RichTextLabel" parent="VBoxContainer/HBoxContainer/SplitContainer/Previewer/CenterContainer/PICT"]
 margin_left = 311.0
 margin_right = 711.0
-margin_bottom = 266.0
+margin_bottom = 306.0
 rect_min_size = Vector2( 400, 207 )
-custom_fonts/normal_font = SubResource( 1 )
+custom_fonts/normal_font = ExtResource( 2 )
 bbcode_enabled = true
 visible_characters = 990
 
 [node name="Information" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/SplitContainer/Previewer"]
-margin_top = 294.0
+margin_top = 358.0
 margin_right = 1024.0
-margin_bottom = 308.0
+margin_bottom = 372.0
 alignment = 1
 
 [node name="Terminals" type="Label" parent="VBoxContainer/HBoxContainer/SplitContainer/Previewer/Information"]
@@ -169,9 +215,9 @@ margin_bottom = 14.0
 text = "Pages: 0"
 
 [node name="Navigation" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/SplitContainer/Previewer"]
-margin_top = 312.0
+margin_top = 376.0
 margin_right = 1024.0
-margin_bottom = 332.0
+margin_bottom = 396.0
 alignment = 1
 
 [node name="Prev" type="Button" parent="VBoxContainer/HBoxContainer/SplitContainer/Previewer/Navigation"]
@@ -194,7 +240,7 @@ margin_bottom = 20.0
 text = "=>"
 
 [node name="Editor" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/SplitContainer"]
-margin_top = 344.0
+margin_top = 408.0
 margin_right = 1024.0
 margin_bottom = 562.0
 __meta__ = {
@@ -213,7 +259,7 @@ text = "Update preview"
 [node name="Inline" type="TextEdit" parent="VBoxContainer/HBoxContainer/SplitContainer/Editor"]
 margin_top = 24.0
 margin_right = 1024.0
-margin_bottom = 218.0
+margin_bottom = 154.0
 size_flags_vertical = 3
 show_line_numbers = true
 draw_tabs = true
@@ -222,6 +268,8 @@ wrap_enabled = true
 [connection signal="file_option_selected" from="VBoxContainer/PanelContainer/Toolbar" to="." method="_on_Toolbar_file_option_selected"]
 [connection signal="file_selected" from="VBoxContainer/PanelContainer/SaveDialog" to="." method="_on_SaveDialog_file_selected"]
 [connection signal="file_selected" from="VBoxContainer/PanelContainer/OpenDialog" to="." method="_on_FileDialog_file_selected"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/SplitContainer/Previewer/Scale/Prev" to="VBoxContainer/HBoxContainer/SplitContainer/Previewer" method="_on_Prev_scale_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/SplitContainer/Previewer/Scale/Next" to="VBoxContainer/HBoxContainer/SplitContainer/Previewer" method="_on_Next_scale_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/SplitContainer/Previewer/Navigation2/Prev" to="VBoxContainer/HBoxContainer/SplitContainer/Previewer" method="_on_Prev_term_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/SplitContainer/Previewer/Navigation2/Next" to="VBoxContainer/HBoxContainer/SplitContainer/Previewer" method="_on_Next_term_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/SplitContainer/Previewer/Navigation/Prev" to="VBoxContainer/HBoxContainer/SplitContainer/Previewer" method="_on_Prev_pressed"]
