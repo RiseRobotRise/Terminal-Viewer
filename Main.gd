@@ -4,12 +4,11 @@ enum {
 	BBCODE,
 	HTML
 }
-var terminal : String
-var rawterm : String
+var terminal : String = ""
+var rawterm : String = ""
 var export_flag : int = RAW
 # Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+
 
 func alephone_to_bbcode(term : String) -> String:
 	
@@ -62,7 +61,7 @@ func fix_bolds(term : String):
 	
 
 func _on_Open_pressed():
-	$HBoxContainer/GridContainer/Open/FileDialog.popup()
+	$OpenDialog.popup()
 	
 
 
@@ -89,13 +88,15 @@ func update_terms():
 
 func _on_Toolbar_file_option_selected(id : int):
 	if id == 0:
-		$VBoxContainer/PanelContainer/OpenDialog.popup_centered()
+		$OpenDialog.popup_centered()
 	else:
 		if id == 1:
 			export_flag = RAW
+			$SaveDialog.filters = ["*.txt ; raw terminal markdown"]
 		elif id == 2: 
 			export_flag = BBCODE
-		$VBoxContainer/PanelContainer/SaveDialog.popup_centered()
+			$SaveDialog.filters = ["*.bbcode ; parseable bbcode"]
+		$SaveDialog.popup_centered()
 	
 
 func _on_SaveDialog_file_selected(path):
@@ -109,3 +110,8 @@ func _on_SaveDialog_file_selected(path):
 	file.close()
 
 
+
+
+func _on_Toolbar_about_option_selected(id):
+	if id == 0:
+		$About.popup_centered()

@@ -103,6 +103,8 @@ func _on_Prev_pressed():
 
 
 func _on_Next_pressed():
+	if terminals.size() < 1:
+		return
 	if index < terminals[term].pages.size()-1:
 		index+=1
 		display_page(term, index)
@@ -112,6 +114,8 @@ func _on_Prev_term_pressed():
 	if term > 0:
 		term-=1
 		index=0
+		if terminals.size() < 1:
+			return
 		display_page(term,index)
 		
 

@@ -18,6 +18,7 @@ _global_script_class_icons={
 config/name="Terminal Viewer"
 run/main_scene="res://Main.tscn"
 config/custom_user_dir_name="C://Algo"
+run/low_processor_mode=true
 config/icon="res://icon.png"
 
 [debug]
