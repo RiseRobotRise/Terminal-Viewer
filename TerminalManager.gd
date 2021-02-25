@@ -3,40 +3,69 @@ extends VBoxContainer
 var terminals : Array = []
 var index : int = 0
 var term : int = 0
+var texture_path : String = ""
+
+var page_types = [
+	"UNFINISHED",
+	"FINISHED",
+	"SUCCESS",
+	"FAILURE",
+	"PICT",
+	"LOGON", 
+	"LOGOFF",
+	"INFORMATION",
+	"CHECKPOINT",
+	"BRIEFING"
+]
+
 onready var CONTAINER = $CenterContainer/PICT
 onready var PICTURE = $CenterContainer/PICT/Texture
 onready var TERMINAL = $CenterContainer/PICT/VBoxContainer/Terminal
 #id : int
 #type : PICT/LOGON
+#img_id : PICT/LOGON -> XXXXX <-
 #args : IMG/ALGIN
 #text : the terminal itself
-
-func create_page(unformatted_terminal : String):
-	var page : Dictionary = {}
 
 func add_terminal(unformatted_substring : String):
 	var term : Dictionary = {}
 	term["pages"] = []
-	unformatted_substring = unformatted_substring.trim_prefix("#TERMINAL ")
+	unformatted_substring = unformatted_substring.replace("#TERMINAL", "")
 #	unformatted_substring = unformatted_substring.substr(1)
 	var pages = unformatted_substring.split("#END", false)
 	for page in pages:
+		
 		var appendable :Dictionary = {}
-		if page.find("#PICT") != -1:
-			appendable["type"]="PICT"
-		elif page.find("#CHECKPOINT")!=-1:
-			appendable["type"]="CHECKPOINT"
-		elif page.find("#INFORMATION")!=-1:
-			appendable["type"]="INFORMATION"
-		elif page.find("#BRIEFING")!=-1:
-			appendable["type"]="BRIEFING"
-		else:
-			continue
-		page.replace("#CHECKPOINT","")
-		page.replace("#INFORMATION","")
+		if page.find("#FINISHED") != -1:
+			appendable["type"]="FINISHED"
+		elif page.find("#UNFINISHED")!=-1:
+			appendable["type"]="UNFINISHED"
+		elif page.find("#SUCCESS")!=-1:
+			appendable["type"]="SUCCESS"
+		elif page.find("#FAILURE")!=-1:
+			appendable["type"]="FAILURE"
+		var subpages = []
+		for type in page_types:
+			var subsubpages = []
+			var type_place = page.find(type)
+			while type_place != -1:
+				var page_dict = {}
+				page_dict["text"] = page.substr(type_place, page.find("#", type_place))
+				page = page.replace(page_dict["text"], "")
+				page_dict["type"] = type
+				page_dict["args"] = ""
+				type_place = page.find(type, type_place)
+				subsubpages.append(page_dict)
+			for page_dict in subsubpages:
+				subpages.append(page_dict)
+#			page = page.replace(subpages.back(), "")
+		for subpage in subpages:
+			for type in page_types:
+				subpage["text"] = subpage["text"].replace("#"+type,"")
 		appendable["args"]="NONE"
 		appendable["text"]="[color=lime]"+page
-		term.pages.append(appendable)
+		for subpage in subpages:
+			term.pages.append(subpage)
 #	var start = 0
 #	var text
 #	var type
@@ -95,6 +124,8 @@ func display_page(terminal : int, id : int):
 		TERMINAL.visible_characters = 1584
 	TERMINAL.bbcode_text = page.text
 
+func use_texture_set(name : String):
+	texture_path = "res://respict/"+name
 
 func _on_Prev_pressed():
 	if index > 0:

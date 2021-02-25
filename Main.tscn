@@ -119,8 +119,8 @@ window_title = "Guardar un Archivo"
 resizable = true
 access = 2
 filters = PoolStringArray( "*.txt, *.bbcode" )
-current_dir = "E:/Github/Terminal-Viewer"
-current_path = "E:/Github/Terminal-Viewer/"
+current_dir = "/Github/Terminal-Viewer"
+current_path = "/Github/Terminal-Viewer/"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -136,8 +136,8 @@ resizable = true
 mode = 0
 access = 2
 filters = PoolStringArray( "*.txt" )
-current_dir = "E:/Github/Terminal-Viewer"
-current_path = "E:/Github/Terminal-Viewer/"
+current_dir = "/Github/Terminal-Viewer"
+current_path = "/Github/Terminal-Viewer/"
 __meta__ = {
 "_edit_use_anchors_": false
 }

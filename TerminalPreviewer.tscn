@@ -66,7 +66,7 @@ text = "=>"
 [node name="CenterContainer" type="CenterContainer" parent="."]
 margin_top = 48.0
 margin_right = 1024.0
-margin_bottom = 525.0
+margin_bottom = 354.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -74,16 +74,14 @@ size_flags_vertical = 3
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 156.0
-margin_top = 85.0
 margin_right = 867.0
-margin_bottom = 391.0
+margin_bottom = 306.0
 rect_min_size = Vector2( 711, 306 )
 
 [node name="PICT" type="GridContainer" parent="CenterContainer"]
 margin_left = 156.0
-margin_top = 85.0
 margin_right = 867.0
-margin_bottom = 391.0
+margin_bottom = 306.0
 rect_min_size = Vector2( 0, 306 )
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -129,9 +127,9 @@ margin_bottom = 306.0
 rect_min_size = Vector2( 0, 16 )
 
 [node name="Information" type="HBoxContainer" parent="."]
-margin_top = 529.0
+margin_top = 358.0
 margin_right = 1024.0
-margin_bottom = 543.0
+margin_bottom = 372.0
 alignment = 1
 
 [node name="Terminals" type="Label" parent="Information"]
@@ -147,9 +145,9 @@ margin_bottom = 14.0
 text = "Pages: 0"
 
 [node name="Navigation" type="HBoxContainer" parent="."]
-margin_top = 547.0
+margin_top = 376.0
 margin_right = 1024.0
-margin_bottom = 567.0
+margin_bottom = 396.0
 alignment = 1
 
 [node name="Prev" type="Button" parent="Navigation"]
